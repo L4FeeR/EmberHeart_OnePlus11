@@ -342,7 +342,7 @@ runs:
         make -j$(nproc --all) ARCH=arm64 LLVM=1 O=out INSTALL_MOD_PATH=$INSTALL_MOD_PATH modules_install
 
         # KERNEL_PLATFORM/oplus/config/modules.ext.oplus
-        ext_oplus=($(cat "$KERNEL_PLATFORM/oplus/config/modules.ext.oplus"))
+        ext_oplus=($(cat "$KERNEL_PLATFORM/oplus/config/modules.ext.$KERNEL_VER.oplus"))
         
         # make -C modules.ext.oplus ../modules.ext.oplus KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$MSM/out LLVM=1 LLVM_IAS=1 DEPMOD=depmod DTC=dtc CHIPSET_COMPANY=QCOM OPLUS_VND_BUILD_PLATFORM=$OP_SOC
         for module in "${ext_oplus[@]}"; do

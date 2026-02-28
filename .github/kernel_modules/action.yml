@@ -249,20 +249,6 @@ runs:
         CONFIG_CAN_SLCAN=m
         EOF
 
-    - name: Add configs for vendor boot
-      shell: bash
-      run: |
-        set -euo pipefail
-        KERNEL_PATH="$GITHUB_WORKSPACE/$CONFIG/kernel_platform"
-        MSM="$KERNEL_PATH/msm-kernel"
-        cd "$MSM"
-        cat >> arch/arm64/configs/gki_defconfig <<EOF
-        
-
-        
-        EOF
-        
-
     - name: Add my kernel patches to msm kernel
       if: env.OP_SOC == 'kalama'
       shell: bash
@@ -374,13 +360,16 @@ runs:
             ../vendor/qcom/opensource/mm-drivers/sync_fence
             ../vendor/qcom/opensource/mm-drivers/msm_ext_display
             ../vendor/qcom/opensource/securemsm-kernel/
+            ../vendor/qcom/opensource/display-drivers/msm/
         )
         
         ./scripts/config --file arch/arm64/configs/gki_defconfig \
             --enable CONFIG_HDCP_QSEECOM \
             --enable CONFIG_QTI_TZ_LOG \
             --enable CONFIG_QCOM_SMCINVOKE \
-            --enable CONFIG_HW_RANDOM_MSM_LEGACY
+            --enable CONFIG_HW_RANDOM_MSM_LEGACY \
+            --enable CONFIG_DRM_MSM \
+            --enable CONFIG_DRM_OPLUS
         
         make ARCH=arm64 LLVM=1 O=out gki_defconfig
         

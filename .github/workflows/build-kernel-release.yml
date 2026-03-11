@@ -25,8 +25,8 @@ on:
           - OOS15
           - FAST_BUILD_OOS15
           - OOS16
-          - OOS16_TMP
-        default: OOS16
+          - OOS16_CUSTOM
+        default: OOS16_CUSTOM
       ksun_branch:
         description: 'Enter KernelSU Next Branch or commit hash (blank for stable tag)'
         required: true

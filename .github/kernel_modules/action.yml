@@ -446,14 +446,6 @@ runs:
             make -C "$module" M="../$module" -j$(nproc --all) ARCH=arm64 KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$MSM/out LLVM=1 LLVM_IAS=1 DEPMOD=depmod DTC=dtc "${qcom_flags[@]}" INSTALL_MOD_PATH=$INSTALL_MOD_PATH modules_install
         done
 
-        cd "$MSM"
-        make ARCH=arm64 LLVM=1 O=out oldconfig && make ARCH=arm64 LLVM=1 O=out prepare
-
-        cd "$KERNEL_PLATFORM"
-        QCACLD="../vendor/qcom/opensource/wlan/qcacld-3.0"
-        make -C "$QCACLD" M="../$QCACLD" -j$(nproc --all) ARCH=arm64 KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$MSM/out LLVM=1 LLVM_IAS=1 DEPMOD=depmod DTC=dtc "${qcom_flags[@]}" V=1 modules
-        make -C "$QCACLD" M="../$QCACLD" -j$(nproc --all) ARCH=arm64 KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$MSM/out LLVM=1 LLVM_IAS=1 DEPMOD=depmod DTC=dtc "${qcom_flags[@]}" V=1 INSTALL_MOD_PATH=$INSTALL_MOD_PATH modules_install
-
     - name: Filter modules
       shell: bash
       run: |

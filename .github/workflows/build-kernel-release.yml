@@ -125,7 +125,7 @@ jobs:
           fetch-depth: 1
 
       - name: Build Kernel
-        uses: ./.github/actions
+        uses: ./.github/kernel
         with:
           op_config_json: ${{ toJSON(matrix) }}
           ksun_branch_or_hash: ${{ inputs.ksun_branch }}
